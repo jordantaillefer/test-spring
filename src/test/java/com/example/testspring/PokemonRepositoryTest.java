@@ -1,0 +1,48 @@
+package com.example.testspring;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+
+import java.util.UUID;
+
+@DataJpaTest
+public class PokemonRepositoryTest {
+    @Autowired
+    private TestEntityManager entityManager;
+
+
+    @Autowired
+    private PokemonRepository pokemonRepository;
+
+    @Test
+    public void shoud_find_no_pokemons_if_repository_is_empty() {
+        Iterable<Pokemon> pokemons = pokemonRepository.findAll();
+        assertThat(pokemons).isEmpty();
+    }
+
+    @Test
+    public void shoud_store_a_pokemon() {
+        final UUID uuid = UUID.randomUUID();
+        final String name = "bulbizarre";
+        Pokemon pokemon = pokemonRepository.save(new Pokemon(uuid, name));
+        assertThat(pokemon).hasFieldOrPropertyWithValue("id", uuid);
+        assertThat(pokemon).hasFieldOrPropertyWithValue("name", name);
+    }
+
+    @Test
+    public void should_find_all_tutorials() {
+        Pokemon pokemon1 = new Pokemon(UUID.randomUUID(), "bulbizarre");
+        entityManager.persist(pokemon1);
+        Pokemon pokemon2 = new Pokemon(UUID.randomUUID(), "salamèche");
+        entityManager.persist(pokemon2);
+        Pokemon pokemon3 = new Pokemon(UUID.randomUUID(), "carapuce");
+        entityManager.persist(pokemon3);
+        Iterable<Pokemon> tutorials = pokemonRepository.findAll();
+        assertThat(tutorials).hasSize(3).contains(pokemon1, pokemon2, pokemon3);
+    }
+
+}
