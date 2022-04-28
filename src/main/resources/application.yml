@@ -1,0 +1,18 @@
+#spring.datasource.url=jdbc:postgresql://${DATABASE_HOST}/${DATABASE_DBNAME}
+#spring.datasource.username=${DATABASE_USERNAME}
+#spring.datasource.password=${DATABASE_PASSWORD}
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/pokemon
+    username: postgres
+    password: postgres
+
+server:
+  address: 0.0.0.0
+
+
+# 0u_4IEJHRY8RxOks7Dkn
+
+# test-spring-1823.postgresql.a.osc-fr1.scalingo-dbs.com
+# test_spring_1823

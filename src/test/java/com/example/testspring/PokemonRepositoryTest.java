@@ -14,7 +14,6 @@ public class PokemonRepositoryTest {
     @Autowired
     private TestEntityManager entityManager;
 
-
     @Autowired
     private PokemonRepository pokemonRepository;
 
