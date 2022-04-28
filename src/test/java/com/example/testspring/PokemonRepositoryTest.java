@@ -28,18 +28,19 @@ public class PokemonRepositoryTest {
     public void shoud_store_a_pokemon() {
         final UUID uuid = UUID.randomUUID();
         final String name = "bulbizarre";
-        Pokemon pokemon = pokemonRepository.save(new Pokemon(uuid, name));
+        final String type = "plante";
+        Pokemon pokemon = pokemonRepository.save(new Pokemon(uuid, name, type));
         assertThat(pokemon).hasFieldOrPropertyWithValue("id", uuid);
         assertThat(pokemon).hasFieldOrPropertyWithValue("name", name);
     }
 
     @Test
     public void should_find_all_tutorials() {
-        Pokemon pokemon1 = new Pokemon(UUID.randomUUID(), "bulbizarre");
+        Pokemon pokemon1 = new Pokemon(UUID.randomUUID(), "bulbizarre", "plante");
         entityManager.persist(pokemon1);
-        Pokemon pokemon2 = new Pokemon(UUID.randomUUID(), "salamèche");
+        Pokemon pokemon2 = new Pokemon(UUID.randomUUID(), "salamèche", "feu");
         entityManager.persist(pokemon2);
-        Pokemon pokemon3 = new Pokemon(UUID.randomUUID(), "carapuce");
+        Pokemon pokemon3 = new Pokemon(UUID.randomUUID(), "carapuce", "eau");
         entityManager.persist(pokemon3);
         Iterable<Pokemon> tutorials = pokemonRepository.findAll();
         assertThat(tutorials).hasSize(3).contains(pokemon1, pokemon2, pokemon3);
