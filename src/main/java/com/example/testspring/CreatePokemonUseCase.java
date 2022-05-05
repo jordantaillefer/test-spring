@@ -13,6 +13,7 @@ public class CreatePokemonUseCase {
 
     public Pokemon execute(String name, String type) {
         Pokemon pokemon = PokemonFactory.create(name, type);
+        System.out.println(pokemon);
         this.pokemonRepository.save(pokemon);
         return pokemon;
     }

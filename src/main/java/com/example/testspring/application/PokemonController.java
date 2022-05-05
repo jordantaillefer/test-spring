@@ -21,8 +21,8 @@ public class PokemonController {
     }
 
     @PostMapping(value = "/pokemon", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String createPokemon(@RequestBody String name) {
-        Pokemon createdPokemon = this.createPokemonUseCase.execute(name, "plante");
+    public String createPokemon(@RequestBody Pokemon pokemon) {
+        Pokemon createdPokemon = this.createPokemonUseCase.execute(pokemon.getName(), pokemon.getType());
         return String.format("created Pokemon %s, type: %s", createdPokemon.getName(), createdPokemon.getType());
     }
 }

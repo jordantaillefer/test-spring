@@ -1,5 +1,6 @@
 package com.example.testspring;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -23,13 +24,14 @@ class TestSpringApplicationTests {
     @Test
     public void exampleTest() throws Exception {
         UUID test = UUID.randomUUID();
+        String corpsDeLaRequête = new JSONObject().put("id", test).put("name", "bulbi").put("type", "plante").toString();
         this.mvc.perform(
                 post("/pokemon")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(String.format("{ pokemon: { id: %s, name: \"bulbizarre\", type: \"plante\" }}", test))
+                .content(corpsDeLaRequête)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Hello World"));
+                .andExpect(content().string("created Pokemon bulbi, type: plante"));
     }
 
 }
