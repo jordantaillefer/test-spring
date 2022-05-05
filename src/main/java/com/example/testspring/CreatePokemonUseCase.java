@@ -1,5 +1,6 @@
 package com.example.testspring;
 
+import com.example.testspring.infra.PokemonRepository;
 import org.springframework.stereotype.Service;
 
 @Service
